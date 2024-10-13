@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SimpleLibraryService implements LibraryService {
@@ -29,7 +30,8 @@ public class SimpleLibraryService implements LibraryService {
   }
 
   @Override
-  public void removeBook(String isbn) {
+  @Transactional
+  public synchronized void removeBook(String isbn) {
     if (findBookByISBN(isbn).isEmpty()) {
       throw new BookNotFoundException();
     }
@@ -49,22 +51,28 @@ public class SimpleLibraryService implements LibraryService {
 
 
   @Override
-  public Optional<Book> borrowBook(String isbn) {
+  @Transactional
+  public synchronized Optional<Book> borrowBook(String isbn) {
     Optional<Book> book = findBookByISBN(isbn);
     book.ifPresent(b -> {
       if (b.getCopiesAvailable().decrementAndGet() < 0) {
         throw new NoBookCopiesRemainingToBorrowException();
       }
+      bookRepository.save(b);
     });
     return book;
   }
 
   @Override
-  public void returnBook(String isbn) {
+  @Transactional
+  public synchronized void returnBook(String isbn) {
     Optional<Book> book = findBookByISBN(isbn);
-    if (book.isEmpty()) {
+
+    book.ifPresentOrElse(b -> {
+      b.getCopiesAvailable().getAndIncrement();
+      bookRepository.save(b);
+    }, () -> {
       throw new BookNotFoundException();
-    }
-    book.ifPresent(b -> b.getCopiesAvailable().getAndIncrement());
+    });
   }
 }

@@ -204,6 +204,15 @@ class LibraryControllerTest {
   }
 
   @Test
+  void seedBooks_addsBooks() throws Exception {
+
+    this.mockMvc.perform(post("/api/book/seed"))
+        .andExpect(status().isOk());
+
+
+  }
+
+  @Test
   void returnExistingBook_isOk() throws Exception {
     this.mockMvc.perform(post("/api/book/return/1")).andExpect(status().isOk());
 
