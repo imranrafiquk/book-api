@@ -1,6 +1,23 @@
 # book-library-api
 ## Build & run
+
+### Locally
+
+#### Environment
+Requires mvn and java 17+ 
+
     mvn clean package spring-boot:run
+
+#### GitPod
+
+A link to the GitPod has been send via email.
+
+The project is also avaialble on GitPod. The project can be ran and tested with coverage on GitPod in VSCode without having to clone this repo to your configured environemnt.
+
+There is a Java run configuration that will run the Spring boot app
+
+Unit tests may be run by right clicking on the test folder and selecting 'Run Tests with Coverage'. The results will then be displayed in the 'TEST RESULTS' tab and coverage displayed in the project explorer alongside the packages / files.
+
 ## Api Documentation 
 
 ### Endpoints
@@ -14,7 +31,7 @@
 | /api/book/findByAuthor/{author}| GET    | Get a book by the author                | Find a book in the library by the author               |
 | /api/book/{isbn}              | DELETE | Delete book                             | Remove a book from the library                          |
 
-### Debug Seed data
+### Seed data - used by the debug seed endpoint
 | ISBN               | Title                                        | Author                         | Publication Year | Copies |
 |--------------------|----------------------------------------------|--------------------------------|-------------------|--------|
 | 978-1-61729-008-1  | Cracking the Coding Interview                 | Gayle Laakmann McDowell       | 2021              | 5      |
@@ -23,11 +40,10 @@
 | 978-1-59327-000-1  | The Geek's Guide to Interviews                | T. D. Pankaj                  | 2021              | 5      |
 
 ### OpenAPI
-#### Running locally
+
 http://localhost:8080/swagger-ui/index.html
 
-#### Publicly available 
-https://8080-imranrafiqu-booklibrary-2tbihzvzgz0.ws-eu116.gitpod.io/swagger-ui/index.html
+Also viewable through GitPod
 
 
 ## Assumptions
