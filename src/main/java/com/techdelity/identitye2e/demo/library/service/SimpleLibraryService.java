@@ -31,7 +31,7 @@ public class SimpleLibraryService implements LibraryService {
 
   @Override
   @Transactional
-  public synchronized void removeBook(String isbn) {
+  public void removeBook(String isbn) {
     if (findBookByISBN(isbn).isEmpty()) {
       throw new BookNotFoundException();
     }
@@ -52,12 +52,13 @@ public class SimpleLibraryService implements LibraryService {
 
   @Override
   @Transactional
-  public synchronized Optional<Book> borrowBook(String isbn) {
+  public Optional<Book> borrowBook(String isbn) {
     Optional<Book> book = findBookByISBN(isbn);
     book.ifPresent(b -> {
-      if (b.getCopiesAvailable().decrementAndGet() < 0) {
+      if (b.getCopiesAvailable() <= 0) {
         throw new NoBookCopiesRemainingToBorrowException();
       }
+      b.setCopiesAvailable(b.getCopiesAvailable() - 1);
       bookRepository.save(b);
     });
     return book;
@@ -65,11 +66,11 @@ public class SimpleLibraryService implements LibraryService {
 
   @Override
   @Transactional
-  public synchronized void returnBook(String isbn) {
+  public void returnBook(String isbn) {
     Optional<Book> book = findBookByISBN(isbn);
 
     book.ifPresentOrElse(b -> {
-      b.getCopiesAvailable().getAndIncrement();
+      b.setCopiesAvailable(b.getCopiesAvailable() + 1);;
       bookRepository.save(b);
     }, () -> {
       throw new BookNotFoundException();

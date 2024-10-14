@@ -90,7 +90,7 @@ class LibraryControllerTest {
         .andExpect(jsonPath("author").value(mockBook.getAuthor()))
         .andExpect(jsonPath("title").value(mockBook.getTitle()))
         .andExpect(jsonPath("publicationYear").value(mockBook.getPublicationYear()))
-        .andExpect(jsonPath("copiesAvailable").value(mockBook.getCopiesAvailable().intValue()));
+        .andExpect(jsonPath("copiesAvailable").value(mockBook.getCopiesAvailable()));
   }
 
   @Test
@@ -122,7 +122,7 @@ class LibraryControllerTest {
         .andExpect(jsonPath("$.[0].title").value(mockBook.getTitle()))
         .andExpect(jsonPath("$.[0].publicationYear").value(mockBook.getPublicationYear()))
         .andExpect(
-            jsonPath("$.[0].copiesAvailable").value(mockBook.getCopiesAvailable().intValue()));
+            jsonPath("$.[0].copiesAvailable").value(mockBook.getCopiesAvailable()));
   }
 
   @Test
@@ -139,28 +139,28 @@ class LibraryControllerTest {
         .andExpect(jsonPath("$.[0].title").value(mockBook1.getTitle()))
         .andExpect(jsonPath("$.[0].publicationYear").value(mockBook1.getPublicationYear()))
         .andExpect(
-            jsonPath("$.[0].copiesAvailable").value(mockBook1.getCopiesAvailable().intValue()))
+            jsonPath("$.[0].copiesAvailable").value(mockBook1.getCopiesAvailable()))
 
         .andExpect(jsonPath("$.[1].isbn").value(mockBook2.getIsbn()))
         .andExpect(jsonPath("$.[1].author").value(mockBook2.getAuthor()))
         .andExpect(jsonPath("$.[1].title").value(mockBook2.getTitle()))
         .andExpect(jsonPath("$.[1].publicationYear").value(mockBook2.getPublicationYear()))
         .andExpect(
-            jsonPath("$.[0].copiesAvailable").value(mockBook2.getCopiesAvailable().intValue()))
+            jsonPath("$.[0].copiesAvailable").value(mockBook2.getCopiesAvailable()))
 
         .andExpect(jsonPath("$.[2].isbn").value(mockBook3.getIsbn()))
         .andExpect(jsonPath("$.[2].author").value(mockBook3.getAuthor()))
         .andExpect(jsonPath("$.[2].title").value(mockBook3.getTitle()))
         .andExpect(jsonPath("$.[2].publicationYear").value(mockBook3.getPublicationYear()))
         .andExpect(
-            jsonPath("$.[2].copiesAvailable").value(mockBook3.getCopiesAvailable().intValue()))
+            jsonPath("$.[2].copiesAvailable").value(mockBook3.getCopiesAvailable()))
 
         .andExpect(jsonPath("$.[3].isbn").value(mockBook4.getIsbn()))
         .andExpect(jsonPath("$.[3].author").value(mockBook4.getAuthor()))
         .andExpect(jsonPath("$.[3].title").value(mockBook4.getTitle()))
         .andExpect(jsonPath("$.[3].publicationYear").value(mockBook4.getPublicationYear()))
         .andExpect(
-            jsonPath("$.[0].copiesAvailable").value(mockBook4.getCopiesAvailable().intValue()));
+            jsonPath("$.[0].copiesAvailable").value(mockBook4.getCopiesAvailable()));
   }
 
   @Test
@@ -188,7 +188,7 @@ class LibraryControllerTest {
         .andExpect(jsonPath("author").value(mockBook.getAuthor()))
         .andExpect(jsonPath("title").value(mockBook.getTitle()))
         .andExpect(jsonPath("publicationYear").value(mockBook.getPublicationYear()))
-        .andExpect(jsonPath("copiesAvailable").value(mockBook.getCopiesAvailable().intValue()));
+        .andExpect(jsonPath("copiesAvailable").value(mockBook.getCopiesAvailable()));
 
   }
 

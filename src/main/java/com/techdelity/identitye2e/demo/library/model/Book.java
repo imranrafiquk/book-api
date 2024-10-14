@@ -2,7 +2,8 @@ package com.techdelity.identitye2e.demo.library.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import java.util.concurrent.atomic.AtomicInteger;
+import org.springframework.data.annotation.Version;
+
 import lombok.Data;
 
 import java.util.Objects;
@@ -21,14 +22,17 @@ public final class Book {
   private String title;
   private String author;
   private int publicationYear;
-  private AtomicInteger copiesAvailable;
+  private int copiesAvailable;
+
+  @Version
+  private int version;
 
   public Book(String isbn, String title, String author, int publicationYear, int copiesAvailable) {
     this.isbn = isbn;
     this.title = title;
     this.author = author;
     this.publicationYear = publicationYear;
-    this.copiesAvailable = new AtomicInteger(copiesAvailable);
+    this.copiesAvailable = copiesAvailable;
   }
 
   @Override
@@ -42,14 +46,12 @@ public final class Book {
     var that = (Book) obj;
     return Objects.equals(this.isbn,
         that.isbn) &&
-        Objects.equals(this.title, that.title) &&
-        Objects.equals(this.author, that.author) &&
-        this.publicationYear == that.publicationYear;
+        Objects.equals(this.version, that.version);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(isbn, title, author, publicationYear);
+    return Objects.hash(isbn, version);
   }
 
 }

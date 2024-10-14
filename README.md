@@ -23,14 +23,25 @@
 | 978-1-59327-000-1  | The Geek's Guide to Interviews                | T. D. Pankaj                  | 2021              | 5      |
 
 ### OpenAPI
+#### Running locally
 http://localhost:8080/swagger-ui/index.html
+
+#### Publicly available 
+https://8080-imranrafiqu-booklibrary-2tbihzvzgz0.ws-eu116.gitpod.io/swagger-ui/index.html
+
 
 ## Assumptions
 * Cannot add a book if one already exists with the same ISBN
 * Cannot borrow a book that has no copies remaining
 * Cannot return a book that doesn't exist in the library
-* Overall it's pretty simple - no user authentication / roles
+* Overall it's pretty simple and limited to cover the basic exercise 
+  * No user authentication / roles
+  * More books can be returned than were avaialable
+  * Books cannot be updated
+  * A borrowed book may be deleted which then make the book impossible to return 
+
 
 ## Additional Features
-* Time did not permit the completion of bonus features mentioned in the task
 * There is a debug endpoint to seed some books
+* Thread safe and concurrent as per the exercise
+* Time did not permit the completion of bonus features jwt authentication or rate limiting 
