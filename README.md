@@ -10,8 +10,6 @@ Requires mvn and java 17+
 
 #### GitPod
 
-A link to the GitPod has been send via email.
-
 The project is also avaialble on GitPod. The project can be ran and tested with coverage on GitPod in VSCode without having to clone this repo to your configured environemnt.
 
 There is a Java run configuration that will run the Spring boot app
